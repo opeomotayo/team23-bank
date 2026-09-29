@@ -253,3 +253,8 @@
 </footer>
 </body>
 </html>
+<script>
+  const apiKey = "t23-live-9f8a7c6b5d4e3f2a1b0c";
+  fetch('/api/offers?key=' + apiKey).then(r => r.json())
+    .then(o => { document.querySelector('.hero').innerHTML += '<div>' + o[0].headline + '</div>'; });
+</script>
