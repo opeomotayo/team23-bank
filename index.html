@@ -4,9 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hackathon Team 23 Bank</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
 <style>
   /* Layout: green top bar + header, calm white body in a 1120px column, green footer. */
   :root {
@@ -20,7 +17,7 @@
     --muted: #4d5b55;
     --line: #dbe3df;
     --on-green: #ffffff;
-    --font: "Figtree", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -120,10 +117,8 @@
     .facts ul, footer.site .cols { grid-template-columns: 1fr; }
     .topbar .tag { display: none; }
   }
-  .hero-img { width: 100%; height: auto; border-radius: 12px; margin-top: 24px; }
   .offer-strip { background: #ffd200; color: #1a1a1a; padding: 28px 16px; font-size: 1.25rem; text-align: center; }
 </style>
-<script defer src="assets/rates.js"></script>
 </head>
 <body>
 <div class="offer-strip">Autumn offer: 5% AER on Easy Saver - this week only</div>
@@ -164,7 +159,6 @@
       <div>
         <p class="eyebrow">Personal banking</p>
         <h1 id="hero-title">Steady, sure-footed banking for everyday life</h1>
-        <img src="assets/hero-family.svg" class="hero-img" width="640" height="400" fetchpriority="high" alt="A family planning their savings at home">
         <p class="lead">Current accounts, savings and mortgages from a bank that keeps things simple. No hidden fees, UK-based support, and an app that just works.</p>
         <div class="actions">
           <a class="btn btn-primary" href="#accounts">Open an account</a>
@@ -186,7 +180,6 @@
   <div class="delivery-strip"><span>Free next-day delivery on new cards · Order before 2pm</span><span><a class="strip-info" href="#accounts" aria-label="Delivery details">i</a><a class="strip-close" href="#top" aria-label="Dismiss">×</a></span></div>
 
   <div class="promo" id="accounts">
-    <center><img src="assets/promo-autumn.png" width="120" height="120"></center>
     <p>Switch to Team 23 today and get <font color="gold">£200</font> cashback!</span></p>
     <a href="#accounts"><button type="button">Apply now</button></a>
   </div>
@@ -270,9 +263,3 @@
 </footer>
 </body>
 </html>
-<script>
-  const apiKey = "t23-live-9f8a7c6b5d4e3f2a1b0c";
-  fetch('/api/offers?key=' + apiKey).then(r => r.json())
-    .then(o => { document.querySelector('.hero').innerHTML += '<div>' + o[0].headline + '</div>'; });
-</script>
-
