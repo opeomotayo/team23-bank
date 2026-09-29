@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hackathon Team 23 Bank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+  /* Layout: green top bar + header, calm white body in a 1120px column, green footer. */
+  :root {
+    --green: #006a4d;        /* brand green: header, footer, primary buttons */
+    --green-deep: #004d38;
+    --green-tint: #e7f3ee;
+    --gold: #f5c518;         /* one accent, used sparingly */
+    --bg: #ffffff;
+    --surface: #f5f7f6;
+    --fg: #16211d;
+    --muted: #4d5b55;
+    --line: #dbe3df;
+    --on-green: #ffffff;
+    --font: "Figtree", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --green: #0b7a59; --green-deep: #06513b; --green-tint: #12291f;
+      --bg: #0e1412; --surface: #151d1a; --fg: #e8efec; --muted: #a7b6b0; --line: #26332e;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --green: #0b7a59; --green-deep: #06513b; --green-tint: #12291f;
+    --bg: #0e1412; --surface: #151d1a; --fg: #e8efec; --muted: #a7b6b0; --line: #26332e;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 1rem; line-height: 1.6; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
+  h1, h2, h3 { line-height: 1.15; text-wrap: balance; margin: 0; }
+
+  /* Header */
+  .topbar { background: var(--green-deep); color: var(--on-green); font-size: .8125rem; }
+  .topbar .wrap { display: flex; justify-content: space-between; gap: 16px; padding-block: 8px; flex-wrap: wrap; }
+  .topbar nav { display: flex; gap: 18px; }
+  .topbar a { text-decoration: none; opacity: .9; }
+  .topbar a:hover { opacity: 1; text-decoration: underline; }
+  header.site { background: var(--green); color: var(--on-green); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 76px; flex-wrap: wrap; padding-block: 10px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand svg { width: 52px; height: 40px; flex: none; }
+  .brand-name { font-weight: 800; font-size: 1.125rem; letter-spacing: -.01em; line-height: 1.1; }
+  .brand-name small { display: block; font-weight: 600; font-size: .6875rem; letter-spacing: .2em; text-transform: uppercase; opacity: .85; }
+  .mainnav { display: flex; gap: 26px; flex-wrap: wrap; }
+  .mainnav a { text-decoration: none; font-weight: 600; padding-block: 6px; border-bottom: 2px solid transparent; }
+  .mainnav a:hover { border-bottom-color: var(--gold); }
+  .login { background: var(--on-green); color: var(--green); font-weight: 700; text-decoration: none; padding: 10px 18px; border-radius: 999px; }
+
+  /* Hero */
+  .hero { background: var(--green-tint); }
+  .hero .wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; padding-block: 64px; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; font-weight: 700; color: var(--green); margin: 0 0 12px; }
+  .hero h1 { font-size: clamp(2rem, 4.5vw, 3.25rem); font-weight: 800; letter-spacing: -.02em; margin-bottom: 16px; }
+  .hero p.lead { font-size: 1.125rem; color: var(--muted); max-width: 34em; margin: 0 0 28px; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 999px; font-weight: 700; text-decoration: none; border: 2px solid var(--green); }
+  .btn-primary { background: var(--green); color: var(--on-green); }
+  .btn-primary:hover { background: var(--green-deep); border-color: var(--green-deep); }
+  .btn-secondary { color: var(--green); background: transparent; }
+  .btn-secondary:hover { background: var(--green); color: var(--on-green); }
+  .rate-card { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+  .rate-card h2 { font-size: 1rem; color: var(--muted); font-weight: 600; margin-bottom: 18px; }
+  .rates { display: grid; gap: 14px; margin: 0; }
+  .rates div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+  .rates div:last-child { border-bottom: 0; padding-bottom: 0; }
+  .rates dt { color: var(--muted); }
+  .rates dd { margin: 0; font-size: 1.5rem; font-weight: 800; color: var(--green); font-variant-numeric: tabular-nums; }
+  .rate-card small { display: block; margin-top: 16px; color: var(--muted); font-size: .8125rem; }
+
+  /* Sections */
+  section.block { padding-block: 64px; }
+  section.block h2 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.01em; margin-bottom: 8px; }
+  .intro { color: var(--muted); margin: 0 0 32px; max-width: 40em; }
+  .products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; list-style: none; padding: 0; margin: 0; }
+  .products li { background: var(--surface); border-radius: 14px; padding: 26px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .products h3 { font-size: 1.25rem; }
+  .products p { color: var(--muted); margin: 0; flex: 1; }
+  .products a { font-weight: 700; color: var(--green); }
+  .facts { background: var(--surface); }
+  .facts ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .facts li { border-top: 3px solid var(--green); padding-top: 14px; }
+  .facts strong { display: block; font-size: 2rem; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .facts span { color: var(--muted); }
+
+  /* Footer */
+  footer.site { background: var(--green); color: var(--on-green); }
+  footer.site .cols { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; padding-block: 48px 32px; }
+  footer.site h2 { font-size: .9375rem; margin-bottom: 12px; }
+  footer.site ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  footer.site a { text-decoration: none; opacity: .9; }
+  footer.site a:hover { opacity: 1; text-decoration: underline; }
+  footer.site p { margin: 12px 0 0; opacity: .9; max-width: 30em; font-size: .9375rem; }
+  .base { border-top: 1px solid rgba(255,255,255,.25); padding-block: 18px 24px; font-size: .8125rem; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; opacity: .9; }
+
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; padding-block: 44px; }
+    .products { grid-template-columns: 1fr; }
+    .facts ul { grid-template-columns: repeat(2, 1fr); }
+    footer.site .cols { grid-template-columns: 1fr 1fr; }
+    .mainnav { order: 3; width: 100%; gap: 18px; }
+  }
+  @media (max-width: 480px) {
+    .facts ul, footer.site .cols { grid-template-columns: 1fr; }
+    .topbar .tag { display: none; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="donkey" viewBox="0 0 64 48"><path d="M47 11 45.5 1.5c-.2-1.2 1.3-1.7 1.9-.7L51 8.5l1.2-7c.2-1.2 1.8-1.1 1.9.1L54 11c2.6 1.4 4.6 3.6 5.8 6.4.6 1.4-.3 3-1.8 3.1l-3.6.2c-1.3 1.8-3.1 3-5.3 3.6-.4 2.3-.9 4.6-1.5 6.9V44a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-9.3l-2 .6V44a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-8H23v8a1.5 1.5 0 0 1-1.5 1.5h-1A1.5 1.5 0 0 1 19 44v-8.8l-1.8-1V44a1.5 1.5 0 0 1-1.5 1.5h-1A1.5 1.5 0 0 1 13.2 44V31.4c-1.8-1.9-2.8-4.4-2.8-7.1 0-.9.1-1.7.3-2.5L7 26.9c-.5.7-1.5.8-2.1.2-.5-.5-.5-1.2-.1-1.8l5.6-7.6C12.6 15 16.4 13.4 21 13.4h17.2c1.7-1.2 3.6-2 5.7-2.3L47 11Z"/>
+        <circle cx="53.6" cy="15.2" r="1.3" fill="var(--green)"/>
+        <path d="M40.5 13.6c1.6-.9 3.3-1.6 5-1.9" stroke="var(--green)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-dasharray="1.6 1.4"/></symbol></svg>
+<div class="topbar">
+  <div class="wrap">
+    <span class="tag">A fictional bank built for Hackathon Team 23</span>
+    <nav aria-label="Utility">
+      <a href="#about">About us</a>
+      <a href="#help">Help</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Hackathon Team 23 Bank home">
+      <!-- Original donkey mark: long ears, standing side-on -->
+      <svg viewBox="0 0 64 48" aria-hidden="true" fill="currentColor"><use href="#donkey"/></svg>
+      <span class="brand-name">Hackathon Team 23<small>Bank</small></span>
+    </a>
+    <nav class="mainnav" aria-label="Main">
+      <a href="#accounts">Accounts</a>
+      <a href="#accounts">Savings</a>
+      <a href="#accounts">Mortgages</a>
+      <a href="#about">About us</a>
+    </nav>
+    <a class="login" href="#top">Log on</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Personal banking</p>
+        <h1 id="hero-title">Steady, sure-footed banking for everyday life</h1>
+        <p class="lead">Current accounts, savings and mortgages from a bank that keeps things simple. No hidden fees, UK-based support, and an app that just works.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#accounts">Open an account</a>
+          <a class="btn btn-secondary" href="#about">Why Team 23</a>
+        </div>
+      </div>
+      <aside class="rate-card" aria-labelledby="rates-title">
+        <h2 id="rates-title">Today's rates</h2>
+        <dl class="rates">
+          <div><dt>Easy Access Saver</dt><dd>3.10% AER</dd></div>
+          <div><dt>2-year fixed mortgage</dt><dd>4.29%</dd></div>
+          <div><dt>Arranged overdraft</dt><dd>21.9% EAR</dd></div>
+        </dl>
+        <small>Example rates for demo purposes only, 29 September 2026.</small>
+      </aside>
+    </div>
+  </section>
+
+  <section class="block" id="accounts" aria-labelledby="accounts-title">
+    <div class="wrap">
+      <h2 id="accounts-title">Find the right account</h2>
+      <p class="intro">Everything you need to manage money day to day, save for later and buy a home.</p>
+      <ul class="products">
+        <li>
+          <h3>Classic Current Account</h3>
+          <p>Contactless card, instant notifications and fee-free spending abroad.</p>
+          <a href="#accounts">Compare current accounts</a>
+        </li>
+        <li>
+          <h3>Easy Access Saver</h3>
+          <p>Save from £1 and withdraw whenever you need to, with interest paid monthly.</p>
+          <a href="#accounts">See savings rates</a>
+        </li>
+        <li>
+          <h3>First-time Buyer Mortgage</h3>
+          <p>Borrow up to 95% of the property value, with a mortgage adviser at every step.</p>
+          <a href="#accounts">Check what you could borrow</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block facts" id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <h2 id="about-title">About Team 23 Bank</h2>
+      <p class="intro">Built in 48 hours by Hackathon Team 23. The donkey stands for what we value in a bank: dependable, patient and hard-working.</p>
+      <ul>
+        <li><strong>2.4m</strong><span>customers (fictional)</span></li>
+        <li><strong>4.8★</strong><span>app store rating</span></li>
+        <li><strong>24/7</strong><span>UK-based support</span></li>
+        <li><strong>£0</strong><span>monthly account fee</span></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site" id="contact">
+  <div class="wrap cols">
+    <div>
+      <a class="brand" href="#top" aria-label="Hackathon Team 23 Bank home">
+        <svg viewBox="0 0 64 48" aria-hidden="true" fill="currentColor" style="width:44px;height:34px"><use href="#donkey"/></svg>
+        <span class="brand-name">Hackathon Team 23<small>Bank</small></span>
+      </a>
+      <p>Hackathon Team 23 Bank is a fictional bank created for a hackathon demo. It offers no real products or services.</p>
+    </div>
+    <nav aria-label="Products">
+      <h2>Products</h2>
+      <ul>
+        <li><a href="#accounts">Current accounts</a></li>
+        <li><a href="#accounts">Savings</a></li>
+        <li><a href="#accounts">Mortgages</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Help">
+      <h2 id="help">Help</h2>
+      <ul>
+        <li><a href="#help">Contact us</a></li>
+        <li><a href="#help">Report fraud</a></li>
+        <li><a href="#help">Accessibility</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Legal">
+      <h2>Legal</h2>
+      <ul>
+        <li><a href="#contact">Privacy</a></li>
+        <li><a href="#contact">Cookies</a></li>
+        <li><a href="#contact">Terms</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap base">
+    <span>© 2026 Hackathon Team 23 Bank. Demo site.</span>
+    <span>Fictional example rates for illustration only.</span>
+  </div>
+</footer>
+</body>
+</html>
