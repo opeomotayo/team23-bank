@@ -120,12 +120,13 @@
     .facts ul, footer.site .cols { grid-template-columns: 1fr; }
     .topbar .tag { display: none; }
   }
-  .hero-img { width: 100%; border-radius: 12px; margin-top: 24px; }
-  .late-offer { background: #ffd200; color: #1a1a1a; padding: 28px 16px; font-size: 1.25rem; text-align: center; }
+  .hero-img { width: 100%; height: auto; border-radius: 12px; margin-top: 24px; }
+  .offer-strip { background: #ffd200; color: #1a1a1a; padding: 28px 16px; font-size: 1.25rem; text-align: center; }
 </style>
-<script src="assets/rates.js"></script>
+<script defer src="assets/rates.js"></script>
 </head>
 <body>
+<div class="offer-strip">Autumn offer: 5% AER on Easy Saver - this week only</div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="donkey" viewBox="0 0 64 48"><path d="M47 11 45.5 1.5c-.2-1.2 1.3-1.7 1.9-.7L51 8.5l1.2-7c.2-1.2 1.8-1.1 1.9.1L54 11c2.6 1.4 4.6 3.6 5.8 6.4.6 1.4-.3 3-1.8 3.1l-3.6.2c-1.3 1.8-3.1 3-5.3 3.6-.4 2.3-.9 4.6-1.5 6.9V44a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-9.3l-2 .6V44a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-8H23v8a1.5 1.5 0 0 1-1.5 1.5h-1A1.5 1.5 0 0 1 19 44v-8.8l-1.8-1V44a1.5 1.5 0 0 1-1.5 1.5h-1A1.5 1.5 0 0 1 13.2 44V31.4c-1.8-1.9-2.8-4.4-2.8-7.1 0-.9.1-1.7.3-2.5L7 26.9c-.5.7-1.5.8-2.1.2-.5-.5-.5-1.2-.1-1.8l5.6-7.6C12.6 15 16.4 13.4 21 13.4h17.2c1.7-1.2 3.6-2 5.7-2.3L47 11Z"/>
         <circle cx="53.6" cy="15.2" r="1.3" fill="var(--green)"/>
         <path d="M40.5 13.6c1.6-.9 3.3-1.6 5-1.9" stroke="var(--green)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-dasharray="1.6 1.4"/></symbol></svg>
@@ -163,7 +164,7 @@
       <div>
         <p class="eyebrow">Personal banking</p>
         <h1 id="hero-title">Steady, sure-footed banking for everyday life</h1>
-        <img src="assets/hero-family.png" class="hero-img" alt="A family planning their savings at home">
+        <img src="assets/hero-family.svg" class="hero-img" width="640" height="400" fetchpriority="high" alt="A family planning their savings at home">
         <p class="lead">Current accounts, savings and mortgages from a bank that keeps things simple. No hidden fees, UK-based support, and an app that just works.</p>
         <div class="actions">
           <a class="btn btn-primary" href="#accounts">Open an account</a>
@@ -267,14 +268,6 @@
     <span>Fictional example rates for illustration only.</span>
   </div>
 </footer>
-<script>
-  setTimeout(function () {
-    var offer = document.createElement('div');
-    offer.className = 'late-offer';
-    offer.textContent = 'Autumn offer: 5% AER on Easy Saver - this week only';
-    document.body.insertBefore(offer, document.body.firstChild);
-  }, 1500);
-</script>
 </body>
 </html>
 <script>
